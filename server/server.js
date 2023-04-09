@@ -4,10 +4,10 @@ const bodyParser = require("body-parser");
 const mongoose = require("mongoose");
 const path = require("path");
 const cors = require("cors");
-
 // Import configs
 const serverConfig = require("./configs/server.config");
 const dbConfig = require("./configs/db.config");
+const init = require("./utils/init");
 
 //start express app
 const app = express();
@@ -34,9 +34,13 @@ db.on("error", (err) => {
 });
 db.once("open", () => {
   console.log("Connected to MongoDB.");
+  init();
 });
 
 // Plug routes
+require("./routes/auth.route")(app);
+require("./routes/user.route")(app);
+require("./routes/comment.route")(app);
 
 app.get("/hello", (req, res) => {
   res.status(200).send("Welcome to MERNY App!");

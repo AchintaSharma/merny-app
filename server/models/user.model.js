@@ -32,34 +32,38 @@ const userSchema = new mongoose.Schema(
     },
     gender: {
       type: String,
-      required: true,
       enum: [gender.male, gender.female, gender.other],
     },
     mobile: {
       type: String,
-      required: true,
+      default: "",
     },
     address: {
       type: String,
+      default: "",
     },
     bio: {
       type: String,
+      default: "",
     },
     website: {
       type: String,
+      default: "",
     },
-    follower: [
+    followers: [
       {
         type: mongoose.Schema.Types.ObjectId,
         ref: "User",
       },
     ],
+    default: [],
     following: [
       {
         type: mongoose.Schema.Types.ObjectId,
         ref: "User",
       },
     ],
+    default: [],
   },
   { timestamps: true }
 );
