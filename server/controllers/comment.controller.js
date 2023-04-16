@@ -212,8 +212,14 @@ const deleteComment = async (req, res) => {
     }
 
     // Delete the comment
-    await Comment.findByIdAndDelete(req.params.id);
-
+    const deletedComment = await Comment.findByIdAndDelete(req.params.id);
+    if (!deletedComment) {
+      res.status(200).json({
+        success: false,
+        status: 400,
+        message: "Error occurred while deleting comment!",
+      });
+    }
     res.status(200).json({
       success: true,
       status: 200,

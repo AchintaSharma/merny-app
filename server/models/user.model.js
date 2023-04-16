@@ -50,6 +50,13 @@ const userSchema = new mongoose.Schema(
       type: String,
       default: "",
     },
+    saved: [
+      {
+        type: mongoose.Schema.Types.ObjectId,
+        ref: "Post",
+      },
+    ],
+    default: [],
     followers: [
       {
         type: mongoose.Schema.Types.ObjectId,

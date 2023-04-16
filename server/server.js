@@ -41,6 +41,8 @@ db.once("open", () => {
 require("./routes/auth.route")(app);
 require("./routes/user.route")(app);
 require("./routes/comment.route")(app);
+require("./routes/message.route")(app);
+require("./routes/post.route")(app);
 
 app.get("/hello", (req, res) => {
   res.status(200).send("Welcome to MERNY App!");
