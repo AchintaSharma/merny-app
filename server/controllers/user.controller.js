@@ -87,7 +87,7 @@ const searchUser = async (req, res) => {
 
 const updateUser = async (req, res) => {
   try {
-    const { avatar, fullName, mobile, address, story, website, gender } =
+    const { avatar, fullName, bio, mobile, address, story, website, gender } =
       req.body;
     const userId = req.user.id; // Assumes the user ID is stored in the request object after authentication
 
@@ -99,6 +99,7 @@ const updateUser = async (req, res) => {
       {
         avatar,
         fullName,
+        bio,
         mobile,
         address,
         story,

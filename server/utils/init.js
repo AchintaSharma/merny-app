@@ -9,7 +9,7 @@ module.exports = async () => {
 
     if (!user) {
       const user = await User.create({
-        fullName: "Achinta Sharma",
+        fullName: "App Owner",
         userName: "admin",
         password: bcrypt.hashSync(process.env.ADMIN_PASSWORD, 8),
         email: "admin@gmail.com",
