@@ -37,17 +37,23 @@ const Navbar = () => {
           <FontAwesomeIcon icon={faBell} size="lg" color="#1778f2" />
         </button>
         <button className="mr-4">
-          <FontAwesomeIcon icon={faEnvelope} size="lg" color="#1778f2" />
+          <a href="/messenger">
+            <FontAwesomeIcon icon={faEnvelope} size="lg" color="#1778f2" />
+          </a>
         </button>
         <button className="mr-4">
-          <FontAwesomeIcon icon={faHome} size="lg" color="#1778f2" />
+          <a href="/">
+            <FontAwesomeIcon icon={faHome} size="lg" color="#1778f2" />
+          </a>
         </button>
         <div className="w-10 h-10 rounded-full border-2 border-blue-300 border-radiu overflow-hidden">
-          <img
-            src={Avatar}
-            alt="Avatar"
-            className="w-full h-full object-cover"
-          />
+          <a href="/profile">
+            <img
+              src={Avatar}
+              alt="Avatar"
+              className="w-full h-full object-cover"
+            />
+          </a>
         </div>
       </div>
     </nav>

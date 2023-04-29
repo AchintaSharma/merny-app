@@ -1,20 +1,35 @@
-import { useState } from "react";
+import React from "react";
 import "./App.css";
 import Navbar from "./components/Navbar/Navbar";
-import UserInfoDisplayCard from "./components/UserInfoDisplayCard/UserInfoDisplayCard";
+import { createBrowserRouter, RouterProvider } from "react-router-dom";
+import HomePage from "./pages/HomePage";
+import Copyright from "./components/Footer/Copyright";
+import ProfilePage from "./pages/ProfilePage";
+import MessengerPage from "./pages/MessengerPage";
+
+// React router - route definitions
+const router = createBrowserRouter([
+  {
+    path: "/",
+    element: <HomePage />,
+  },
+  {
+    path: "/profile",
+    element: <ProfilePage />,
+  },
+  {
+    path: "/messenger",
+    element: <MessengerPage />,
+  },
+]);
+
 function App() {
   return (
-    <>
+    <React.Fragment>
       <Navbar />
-      <div className="grid grid-cols-12 gap-6 mx-6">
-        <div className="col-span-8 bg-gray-200 h-32"></div>
-        <div className="col-span-4">
-          <UserInfoDisplayCard />
-        </div>
-      </div>
-
-      <>{/*  */}</>
-    </>
+      <RouterProvider router={router} />
+      <Copyright />
+    </React.Fragment>
   );
 }
 
