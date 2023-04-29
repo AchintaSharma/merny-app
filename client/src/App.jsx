@@ -28,7 +28,7 @@ function App() {
     <React.Fragment>
       <Navbar />
       <RouterProvider router={router} />
-      <Copyright />
+      {/* <Copyright /> */}
     </React.Fragment>
   );
 }

@@ -46,7 +46,7 @@ const Navbar = () => {
             <FontAwesomeIcon icon={faHome} size="lg" color="#1778f2" />
           </a>
         </button>
-        <div className="w-10 h-10 rounded-full border-2 border-blue-300 border-radiu overflow-hidden">
+        <div className="w-10 h-10 rounded-full border-2 border-blue-300  overflow-hidden">
           <a href="/profile">
             <img
               src={Avatar}

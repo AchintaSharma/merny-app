@@ -1,16 +1,16 @@
 import PropTypes from "prop-types";
 
-import Avatar from "../../assets/avatar.png";
+// import Avatar from "../../assets/avatar.png";
 
 const Recommendations = ({ userSuggestions }) => {
   return (
-    <div className="bg-white shadow-md rounded-lg p-4 w-full mb-6 relative">
+    <div className="bg-white shadow-md rounded-lg pt-4 px-4 w-full mb-6 relative">
       {userSuggestions.map((user) => (
-        <div className="flex items-center my-4" key={user._id}>
+        <div className="flex items-center pb-4" key={user._id}>
           <div className="relative">
             <img
               className="w-10 h-10 rounded-full"
-              src={Avatar}
+              src={user.avatar}
               alt={user.name}
             />
             <span
