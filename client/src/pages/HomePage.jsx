@@ -2,21 +2,24 @@ import UserInfoDisplayCard from "../components/UserInfoDisplayCard/UserInfoDispl
 import Recommendations from "../components/Recommendations/Recommendations";
 import "./HomePage.css";
 import CreatePost from "../components/CreatePost/CreatePost";
-import Post from "../components/NewsFeed/Post";
-import { userSuggestions, post1, post2, post3 } from "../MockData";
-const { avatar, userName, content, images, likes, comments, createdAt } = post1;
-// console.log(userSuggestions);
-console.log("CHECKING VALUES INSIDE HOMEPAGE");
-console.log("post1: ", post2);
-console.log(avatar, userName, content, images, likes, comments, createdAt);
+import Post from "../components/Post/Post";
+import { posts, userSuggestions } from "../../mockData2";
+// console.log("posts[0] mock data 2 in home page: ", posts[0]);
+console.log(posts);
+console.log(userSuggestions);
 const HomePage = () => {
   return (
-    <div className="grid grid-cols-12 gap-6 mx-6">
-      <div className="col-span-8 h-20">
+    <div className="grid grid-cols-1 sm:grid-cols-12 gap-6 mx-6">
+      <div className="col-span-1 sm:col-span-8 h-20">
         <CreatePost />
-        <Post {...post3} />
+        <Post {...posts[0]} />
+        {/* <Post {...post2} /> */}
+        {/* <Post {...post3} /> */}
+        {/* <Post {...posts[0]} /> */}
+        {/* <Post {...posts[0]} /> */}
+        {/* <CommentSection {...post3} /> */}
       </div>
-      <div className="col-span-4">
+      <div className="col-span-1 sm:col-span-4 hidden sm:block">
         {/* Logged in user information  */}
         <UserInfoDisplayCard />
         {/* User recommendations */}

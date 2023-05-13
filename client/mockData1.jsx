@@ -1,4 +1,4 @@
-import Avatar from "./assets/avatar.png";
+import Avatar from "../client/src/assets/avatar.png";
 const now = Date.now();
 
 const userSuggestions = [
@@ -82,10 +82,34 @@ const post3 = {
     "https://images.pexels.com/photos/10256429/pexels-photo-10256429.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2",
     "https://images.pexels.com/photos/10216143/pexels-photo-10216143.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2",
   ],
-  likes: ["Ethan", "Frank", "Grace"],
+  likes: [
+    {
+      name: "Ethan Halley",
+      userName: "ethan",
+      avatar: Avatar,
+      isFollowing: false,
+    },
+    {
+      name: "Frank Muller",
+      userName: "frank",
+      avatar: Avatar,
+      isFollowing: true,
+    },
+    { name: "Grace", userName: "grace", avatar: Avatar, isFollowing: false },
+  ],
   comments: [
-    { user: "Jack", comment: "Awesome post!" },
-    { user: "Megan", comment: "Great!" },
+    {
+      userName: "Jack",
+      avatar: Avatar,
+      comment: "Awesome post!",
+      createdAt: new Date(now - Math.random() * 1000000000),
+    },
+    {
+      userName: "Megan",
+      avatar: Avatar,
+      comment: "Great!",
+      createdAt: new Date(now - Math.random() * 1000000000),
+    },
   ],
   createdAt: new Date(now - Math.random() * 1000000000),
 };
