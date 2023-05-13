@@ -24,6 +24,8 @@ const validateSignUpRequestBody = async (req, res, next) => {
       });
     }
 
+    //TODO: user name should not contain spaces
+
     // Check if user name already exists
     try {
       const user = await User.findOne({ userName: userName });

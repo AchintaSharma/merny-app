@@ -6,13 +6,19 @@ import HomePage from "./pages/HomePage";
 import Copyright from "./components/Footer/Copyright";
 import ProfilePage from "./pages/ProfilePage";
 import MessengerPage from "./pages/MessengerPage";
+import SignupPage from "./pages/Signup/Signup";
 
 // React router - route definitions
 const router = createBrowserRouter([
   {
+    path: "/register",
+    element: <SignupPage />,
+  },
+  {
     path: "/",
     element: <HomePage />,
   },
+
   {
     path: "/profile",
     element: <ProfilePage />,
