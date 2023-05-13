@@ -1,5 +1,5 @@
 import { useState } from "react";
-import Avatar from "../../assets/avatar.png";
+import Avatar from "../../../../assets/avatar.png";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faCamera, faImage, faTimes } from "@fortawesome/free-solid-svg-icons";
 function CreatePost() {

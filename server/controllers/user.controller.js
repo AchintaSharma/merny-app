@@ -257,6 +257,7 @@ const unfollowUser = async (req, res) => {
   }
 };
 
+// TODO: Optimize
 // brute force
 const userSuggestions = async (req, res) => {
   try {

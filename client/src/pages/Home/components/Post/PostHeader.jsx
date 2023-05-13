@@ -1,5 +1,5 @@
 import PropTypes from "prop-types";
-import { getTimeSinceCreated } from "../../utils/Functions";
+import { getTimeSinceCreated } from "../../../../utils/Functions";
 const PostHeader = ({ avatar, userName, createdAt }) => {
   return (
     <div className="flex items-center">

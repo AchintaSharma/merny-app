@@ -1,42 +1,47 @@
-import React from "react";
+import { useLocation, useRoutes } from "react-router-dom";
+
+import HomePage from "./pages/Home/HomePage";
+// import Copyright from "./";
+import ProfilePage from "./pages/Profile/ProfilePage";
+import MessengerPage from "./pages/Messenger/MessengerPage";
+import SignupPage from "./pages/Signup/Signup";
 import "./App.css";
 import Navbar from "./components/Navbar/Navbar";
-import { createBrowserRouter, RouterProvider } from "react-router-dom";
-import HomePage from "./pages/HomePage";
-import Copyright from "./components/Footer/Copyright";
-import ProfilePage from "./pages/ProfilePage";
-import MessengerPage from "./pages/MessengerPage";
-import SignupPage from "./pages/Signup/Signup";
 
 // React router - route definitions
-const router = createBrowserRouter([
-  {
-    path: "/register",
-    element: <SignupPage />,
-  },
-  {
-    path: "/",
-    element: <HomePage />,
-  },
-
-  {
-    path: "/profile",
-    element: <ProfilePage />,
-  },
-  {
-    path: "/messenger",
-    element: <MessengerPage />,
-  },
-]);
 
 function App() {
-  return (
-    <React.Fragment>
-      <Navbar />
-      <RouterProvider router={router} />
-      {/* <Copyright /> */}
-    </React.Fragment>
-  );
+  let location = useLocation();
+
+  const routes = useRoutes([
+    {
+      path: "/register",
+      element: <SignupPage />,
+    },
+    {
+      path: "/profile",
+      element: <ProfilePage />,
+    },
+    {
+      path: "/messenger",
+      element: <MessengerPage />,
+    },
+    {
+      path: "/",
+      element: <HomePage />,
+    },
+  ]);
+
+  if (location.pathname == "/register") {
+    return routes;
+  } else {
+    return (
+      <>
+        <Navbar />
+        {routes}
+      </>
+    );
+  }
 }
 
 export default App;

@@ -1,4 +1,5 @@
 // import React from "react";
+
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
   faSearch,
@@ -11,8 +12,13 @@ import AppLogo from "../../assets/app-logo.png";
 import Avatar from "../../assets/avatar.png";
 
 const Navbar = () => {
+  const handleClick = () => {};
+
   return (
-    <nav className="flex justify-between items-center shadow-lg bg-white px-6 mb-8 navbar">
+    <nav
+      onClick={handleClick}
+      className="flex justify-between items-center shadow-lg bg-white px-6 mb-8 navbar"
+    >
       <div className="flex items-center app-info">
         <img src={AppLogo} alt="App Logo" className="h-11 mr-2" />
         {/* <span className="text-lg font-bold">MERNY</span> */}

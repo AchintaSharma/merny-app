@@ -1,4 +1,5 @@
 import { v4 as uuidv4 } from "uuid";
+// import Avatar from "./src/assets/avatar.png";
 
 // Mock Data for users.
 const users = [
@@ -64,52 +65,52 @@ const users = [
   },
 ];
 
-console.log(`users: ${users}`);
+// console.log(`users: ${users}`);
 
 // Mock users suggestions:
 
 const userSuggestions = [
   {
-    _id: users[0].id,
-    name: users[0].id,
-    userName: users[0].id,
-    avatar: users[0].id,
+    id: users[0].id,
+    fullName: users[0].fullName,
+    userName: users[0].userName,
+    avatar: users[0].avatar,
     isOnline: true,
   },
   {
-    _id: users[1].id,
-    name: users[1].id,
-    userName: users[1].id,
-    avatar: users[1].id,
+    id: users[1].id,
+    fullName: users[1].fullName,
+    userName: users[1].userName,
+    avatar: users[1].avatar,
     isOnline: true,
   },
   {
-    _id: users[2].id,
-    name: users[2].id,
-    userName: users[2].id,
-    avatar: users[2].id,
+    id: users[2].id,
+    fullName: users[2].fullName,
+    userName: users[2].userName,
+    avatar: users[2].avatar,
     isOnline: false,
   },
   {
-    _id: users[3].id,
-    name: users[3].id,
-    userName: users[3].id,
-    avatar: users[3].id,
+    id: users[3].id,
+    fullName: users[3].fullName,
+    userName: users[3].userName,
+    avatar: users[3].avatar,
     isOnline: false,
   },
   {
-    _id: users[4].id,
-    name: users[4].id,
-    userName: users[4].id,
-    avatar: users[4].id,
+    id: users[4].id,
+    fullName: users[4].fullName,
+    userName: users[4].userName,
+    avatar: users[4].avatar,
     isOnline: true,
   },
 ];
-
+console.log("userSuggestions: ", userSuggestions);
 // Mock data for posts
 const posts = [
   {
-    _id: uuidv4(),
+    id: uuidv4(),
     avatar: users[0].avatar,
     userName: users[0].userName,
     content:
@@ -139,7 +140,7 @@ const posts = [
     user: users[0].userId,
   },
   {
-    _id: uuidv4(),
+    id: uuidv4(),
     avatar: users[1].avatar,
     userName: users[1].userName,
     content:
@@ -178,7 +179,7 @@ const posts = [
     user: users[2].userId,
   },
   {
-    _id: uuidv4(),
+    id: uuidv4(),
     avatar: users[2].avatar,
     userName: users[2].userName,
     content:
@@ -240,7 +241,7 @@ const comments = [
         likes: [],
       },
     ],
-    postId: posts[0]._id,
+    postId: posts[0].id,
     postUserId: posts[0].user,
   },
   {
@@ -249,7 +250,7 @@ const comments = [
     user: users[3].userId,
     likes: [],
     reply: [],
-    postId: posts[0]._id,
+    postId: posts[0].id,
     postUserId: posts[0].user,
   },
   {
@@ -257,7 +258,7 @@ const comments = [
     user: users[1].userId,
     likes: [],
     reply: [],
-    postId: posts[1]._id,
+    postId: posts[1].id,
     postUserId: posts[1].user,
   },
   {
@@ -265,7 +266,7 @@ const comments = [
     user: users[4].userId,
     likes: [],
     reply: [],
-    postId: posts[1]._id,
+    postId: posts[1].id,
     postUserId: posts[1].user,
   },
   {
@@ -279,7 +280,7 @@ const comments = [
         likes: [],
       },
     ],
-    postId: posts[1]._id,
+    postId: posts[1].id,
     postUserId: posts[1].user,
   },
   {
@@ -288,7 +289,7 @@ const comments = [
     user: users[3].userId,
     likes: [],
     reply: [],
-    postId: posts[2]._id,
+    postId: posts[2].id,
     postUserId: posts[2].user,
   },
   {
@@ -297,7 +298,7 @@ const comments = [
     user: users[0].userId,
     likes: [],
     reply: [],
-    postId: posts[2]._id,
+    postId: posts[2].id,
     postUserId: posts[2].user,
   },
   {
@@ -311,7 +312,7 @@ const comments = [
         likes: [],
       },
     ],
-    postId: posts[2]._id,
+    postId: posts[2].id,
     postUserId: posts[2].user,
   },
   {
@@ -331,7 +332,7 @@ const comments = [
         likes: [],
       },
     ],
-    postId: posts[2]._id,
+    postId: posts[2].id,
     postUserId: posts[2].user,
   },
   {
@@ -346,7 +347,7 @@ const comments = [
         likes: [],
       },
     ],
-    postId: posts[2]._id,
+    postId: posts[2].id,
     postUserId: posts[2].user,
   },
   {
@@ -420,5 +421,5 @@ const comments = [
   },
 ];
 
-console.log(posts);
+// console.log(posts);
 export { users, userSuggestions, posts, comments };
