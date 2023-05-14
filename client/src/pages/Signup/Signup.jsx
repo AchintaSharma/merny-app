@@ -37,7 +37,6 @@ const SignupPage = () => {
 
     try {
       const response = await axios.post(AUTH_SIGNUP_API, signupFormData);
-      console.log(response.data);
       const { accessToken, user, message } = response.data;
 
       localStorage.setItem("accessToken", accessToken);

@@ -15,4 +15,8 @@ module.exports = {
     like: "like",
     follow: "follow",
   },
+  status: {
+    online: "Online",
+    offline: "Offline",
+  },
 };

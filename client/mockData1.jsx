@@ -4,35 +4,35 @@ const now = Date.now();
 const userSuggestions = [
   {
     _id: "1",
-    name: "Michael Johnson",
+    fullName: "Michael Johnson",
     userName: "michaeljohnson",
     avatar: Avatar,
     isOnline: true,
   },
   {
     _id: "2",
-    name: "Jane Smith",
+    fullName: "Jane Smith",
     userName: "janesmith",
     avatar: Avatar,
     isOnline: true,
   },
   {
     _id: "3",
-    name: "Bob Johnson",
+    fullName: "Bob Johnson",
     userName: "bobjohnson",
     avatar: Avatar,
     isOnline: false,
   },
   {
     _id: "4",
-    name: "Sara Lee",
+    fullName: "Sara Lee",
     userName: "saralee",
     avatar: Avatar,
     isOnline: false,
   },
   {
     _id: "5",
-    name: "Tom Jones",
+    fullName: "Tom Jones",
     userName: "tomjones",
     avatar: Avatar,
     isOnline: true,
@@ -84,18 +84,23 @@ const post3 = {
   ],
   likes: [
     {
-      name: "Ethan Halley",
+      fullName: "Ethan Halley",
       userName: "ethan",
       avatar: Avatar,
       isFollowing: false,
     },
     {
-      name: "Frank Muller",
+      fullName: "Frank Muller",
       userName: "frank",
       avatar: Avatar,
       isFollowing: true,
     },
-    { name: "Grace", userName: "grace", avatar: Avatar, isFollowing: false },
+    {
+      fullName: "Grace",
+      userName: "grace",
+      avatar: Avatar,
+      isFollowing: false,
+    },
   ],
   comments: [
     {

@@ -1,5 +1,10 @@
 const mongoose = require("mongoose");
-const { userRole, defaultAvatar, gender } = require("../utils/constants");
+const {
+  userRole,
+  defaultAvatar,
+  gender,
+  status,
+} = require("../utils/constants");
 
 const userSchema = new mongoose.Schema(
   {
@@ -71,6 +76,11 @@ const userSchema = new mongoose.Schema(
       },
     ],
     default: [],
+    status: {
+      type: String,
+      enum: [status.online, status.offline],
+      default: status.online,
+    },
   },
   { timestamps: true }
 );

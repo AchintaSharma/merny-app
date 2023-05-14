@@ -5,6 +5,7 @@ import HomePage from "./pages/Home/HomePage";
 import ProfilePage from "./pages/Profile/ProfilePage";
 import MessengerPage from "./pages/Messenger/MessengerPage";
 import SignupPage from "./pages/Signup/Signup";
+import LoginPage from "./pages/Login/Login";
 import "./App.css";
 import Navbar from "./components/Navbar/Navbar";
 
@@ -29,6 +30,10 @@ function App() {
     {
       path: "/",
       element: <HomePage />,
+    },
+    {
+      path: "/login",
+      element: <LoginPage />,
     },
   ]);
 
