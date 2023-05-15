@@ -1,12 +1,14 @@
 const User = require("../models/user.model");
-
+const { userRole } = require("../utils/constants");
 // Function for viewing all users
 const searchAllUsers = async (req, res) => {
   try {
     const users = await User.find();
 
-    // Check if any user except admin exists
-    if (users.length === 1 && users[0].role === userRole.admin) {
+    // Filter out the admin user
+    const filteredUsers = users.filter((user) => user.role !== userRole.admin);
+
+    if (filteredUsers.length === 0) {
       return res.status(404).send({
         success: false,
         status: 404,
@@ -14,14 +16,14 @@ const searchAllUsers = async (req, res) => {
       });
     }
 
-    const userResult = users.map((user) => ({
+    const userResult = filteredUsers.map((user) => ({
       avatar: user.avatar,
       id: user._id,
       fullName: user.fullName,
       userName: user.userName,
     }));
 
-    console.log(`Found ${userResult.length} users in database.`);
+    console.log(`Found ${userResult.length} users in the database.`);
     return res.status(200).send({
       success: true,
       status: 200,
