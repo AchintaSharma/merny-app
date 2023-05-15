@@ -30,9 +30,9 @@ const HomePage = () => {
         {/* Create post component */}
         <CreatePost />
         {/* Feed */}
-        <Post {...post1} />
+        {/* <Post {...post1} />
         <Post {...post2} />
-        <Post {...post3} />
+        <Post {...post3} /> */}
       </div>
       <div className="col-span-1 sm:col-span-4 hidden sm:block">
         {/* Logged in user information  */}
@@ -44,7 +44,7 @@ const HomePage = () => {
         >
           Recommendations
         </h1>
-        <Recommendations userSuggestions={userSuggestions} />
+        {/* <Recommendations userSuggestions={userSuggestions} /> */}
         {/* User's following */}
         <h1
           className="font-bold mb-4 text-xl text-gray-600"
