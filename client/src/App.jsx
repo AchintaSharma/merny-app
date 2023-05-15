@@ -37,7 +37,7 @@ function App() {
     },
   ]);
 
-  if (location.pathname == "/register") {
+  if (location.pathname == "/register" || location.pathname == "/login") {
     return routes;
   } else {
     return (
