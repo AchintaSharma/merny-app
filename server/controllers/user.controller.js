@@ -186,14 +186,15 @@ const followUser = async (req, res) => {
     res.json({
       success: true,
       status: 200,
+      message: `Following ${newUser.fullName}`,
       newUser,
     });
   } catch (err) {
     console.error(err);
-    res.status(500).json({
+    return res.status(500).send({
       success: false,
       status: 500,
-      message: err.message,
+      message: "Internal server error while following user.",
     });
   }
 };
@@ -264,6 +265,7 @@ const unfollowUser = async (req, res) => {
 const userSuggestions = async (req, res) => {
   try {
     const currentUser = await User.findById(req.user.id).populate("following");
+
     // console.log(currentUser);
     const followingList = currentUser.following.map((user) => user._id);
     console.log("followingList", followingList);
@@ -272,8 +274,8 @@ const userSuggestions = async (req, res) => {
 
     for (const followingUserId of followingList) {
       const followingUser = await User.findById(followingUserId)
-        .populate("followers", "_id")
-        .populate("following", "_id");
+        .populate("followers", "_id fullName userName avatar")
+        .populate("following", "_id fullName userName avatar");
 
       for (const follower of followingUser.followers) {
         if (
@@ -294,8 +296,8 @@ const userSuggestions = async (req, res) => {
       }
     }
 
-    console.log("followingSuggestions: ", followingSuggestions);
-    console.log("followerSuggestions: ", followerSuggestions);
+    // console.log("followingSuggestions: ", followingSuggestions);
+    // console.log("followerSuggestions: ", followerSuggestions);
     const suggestedUsers = [
       ...followerSuggestions,
       ...followingSuggestions,

@@ -9,7 +9,7 @@ module.exports = async () => {
 
     if (!user) {
       const user = await User.create({
-        fullName: "App Owner",
+        fullName: "admin",
         userName: "admin",
         password: bcrypt.hashSync(process.env.ADMIN_PASSWORD, 8),
         email: "admin@gmail.com",
@@ -17,6 +17,8 @@ module.exports = async () => {
       });
 
       console.log(`Admin user ${user.fullName} created.`);
+    } else {
+      console.log(`Admin: ${user.fullName}\nEmail: ${user.email}`);
     }
   } catch (err) {
     console.log("Error in DB initialization: ", err.message);

@@ -44,7 +44,7 @@ const HomePage = () => {
         >
           Recommendations
         </h1>
-        {/* <Recommendations userSuggestions={userSuggestions} /> */}
+        <Recommendations />
         {/* User's following */}
         <h1
           className="font-bold mb-4 text-xl text-gray-600"

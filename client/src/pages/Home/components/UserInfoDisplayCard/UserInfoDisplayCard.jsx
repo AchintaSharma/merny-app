@@ -3,7 +3,6 @@ const UserInfoDisplayCard = () => {
 
   if (user) {
     const { fullName, userName, avatar, status } = user;
-    console.log(status);
     const statusCircleColor =
       status == "Online" ? "bg-green-400" : "bg-gray-300";
 
