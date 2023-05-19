@@ -1,4 +1,5 @@
 const authController = require("../controllers/auth.controller");
+
 const {
   validateSignUpRequestBody,
   validateLoginRequestBody,
@@ -20,9 +21,5 @@ module.exports = (app) => {
   );
 
   // Logout route
-  app.post(
-    "/merny/api/v1/auth/logout",
-    validateLoginRequestBody,
-    authController.logout
-  );
+  app.post("/merny/api/v1/auth/logout", authController.logout);
 };

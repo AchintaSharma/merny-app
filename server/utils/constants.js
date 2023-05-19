@@ -16,7 +16,7 @@ module.exports = {
     follow: "follow",
   },
   status: {
-    online: "Online",
-    offline: "Offline",
+    online: "online",
+    offline: "offline",
   },
 };

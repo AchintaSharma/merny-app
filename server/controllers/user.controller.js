@@ -268,14 +268,14 @@ const userSuggestions = async (req, res) => {
 
     // console.log(currentUser);
     const followingList = currentUser.following.map((user) => user._id);
-    console.log("followingList", followingList);
+    // console.log("followingList", followingList);
     const followerSuggestions = [];
     const followingSuggestions = [];
 
     for (const followingUserId of followingList) {
       const followingUser = await User.findById(followingUserId)
-        .populate("followers", "_id fullName userName avatar")
-        .populate("following", "_id fullName userName avatar");
+        .populate("followers", "_id fullName userName avatar status")
+        .populate("following", "_id fullName userName avatar status");
 
       for (const follower of followingUser.followers) {
         if (

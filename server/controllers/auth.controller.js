@@ -3,6 +3,7 @@ const jwt = require("jsonwebtoken");
 const User = require("../models/user.model");
 const authConfig = require("../configs/auth.config");
 const { salt, jwtExpiryTime } = require("../configs/auth.config");
+const { status } = require("../utils/constants");
 
 // Function for user signup
 const signUp = async (req, res) => {
@@ -94,6 +95,8 @@ const login = async (req, res) => {
       { expiresIn: jwtExpiryTime }
     );
     console.log(`${user.role} ${user.fullName} successfully logged in.`);
+    user.status = status.online;
+    await user.save();
 
     // Remove password field from user object
     const userObj = user.toObject();
@@ -119,42 +122,15 @@ const login = async (req, res) => {
 
 //Function for user login
 const logout = async (req, res) => {
-  const { email, password } = req.body;
-  // Fetch user and verify password
   try {
-    // Check if user exists
-    const user = await User.findOne({
-      email: email,
-    });
+    const { userId } = req.query;
+    const currentUser = await User.findById(userId);
+    currentUser.status = status.offline;
+    await currentUser.save();
 
-    if (!user) {
-      return res.status(404).send({
-        status: 404,
-        success: false,
-        field: "email",
-        message: "This email does not exist.",
-      });
-    }
-
-    // Check if the password is correct
-    const passwordIsValid = bcrypt.compareSync(password, user.password);
-
-    if (!passwordIsValid) {
-      return res.status(401).send({
-        status: 401,
-        success: false,
-        field: "password",
-        message: "Password is incorrect.",
-      });
-    }
-
-    // Remove the JWT token from the client-side storage
-    // res.clearCookie("jwt");
-
-    // Redirect the user to the login page or any other page
-    //res.redirect("/login");
-
-    console.log(`${user.role} ${user.fullName} successfully logged out.`);
+    console.log(
+      `${currentUser.role} ${currentUser.fullName} successfully logged out.`
+    );
 
     return res.status(200).send({
       status: 200,
@@ -166,7 +142,7 @@ const logout = async (req, res) => {
     return res.status(500).send({
       status: 500,
       success: false,
-      message: "Internal server error during user login.",
+      message: "Internal server error during user logout.",
     });
   }
 };

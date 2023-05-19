@@ -11,7 +11,7 @@ const Recommendations = () => {
   useEffect(() => {
     const accessToken = localStorage.getItem("accessToken");
     if (!accessToken) {
-      alert("Access token not found");
+      // alert("Access token not found");
       return;
     }
     const axiosConfig = {
@@ -50,7 +50,7 @@ const Recommendations = () => {
             />
             <span
               className={`bottom-0 left-7 absolute w-3.5 h-3.5 border-2 border-white dark:border-gray-800 rounded-full ${
-                user.isOnline ? "bg-green-500" : "bg-gray-400"
+                user.status == "online" ? "bg-green-500" : "bg-gray-400"
               }`}
             ></span>
           </div>

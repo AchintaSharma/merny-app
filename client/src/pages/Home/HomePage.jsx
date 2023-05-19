@@ -2,27 +2,27 @@ import Post from "../Home/components/Post/Post";
 import CreatePost from "./components/CreatePost/CreatePost";
 import UserInfoDisplayCard from "./components/UserInfoDisplayCard/UserInfoDisplayCard";
 import Recommendations from "./components/Recommendations/Recommendations";
-
-import { userSuggestions, post1, post2, post3 } from "../../../mockData1";
+import { useEffect } from "react";
+import { useNavigate } from "react-router-dom";
 
 const HomePage = () => {
   // useNavigate() hook
-  // let navigate = useNavigate();
+  let navigate = useNavigate();
   //
-  // useEffect(() => {
-  //   const checkLoginStatus = () => {
-  //     // Check access token
-  //     const accessToken = localStorage.getItem("accessToken");
-  //     console.log("accessToken: ", accessToken);
-  //     if (!accessToken) {
-  //       console.log("no access token ");
-  //       navigate("/register");
-  //     } else {
-  //       return <h1>Success</h1>;
-  //     }
-  //   };
-  //   checkLoginStatus();
-  // }, []);
+  useEffect(() => {
+    const checkLoginStatus = () => {
+      // Check access token
+      const accessToken = localStorage.getItem("accessToken");
+      console.log("accessToken: ", accessToken);
+      if (!accessToken) {
+        console.log("no access token ");
+        navigate("/login");
+      } else {
+        return <h1>Success</h1>;
+      }
+    };
+    checkLoginStatus();
+  }, []);
 
   return (
     <div className="grid grid-cols-1 sm:grid-cols-12 gap-6 mx-6">
