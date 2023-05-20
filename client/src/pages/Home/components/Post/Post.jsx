@@ -6,6 +6,8 @@ import PostActions from "./PostActions";
 import PostStats from "./PostStats";
 import CommentSection from "./CommentSection";
 
+const VIEW_POST
+
 const Post = ({
   avatar,
   userName,

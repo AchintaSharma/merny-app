@@ -1,6 +1,47 @@
 const Post = require("../models/post.model");
 const User = require("../models/user.model");
 
+// Controller to view feed posts of the logged in user.
+const viewUsersFeedPosts = async (req, res) => {
+  const userId = req.user.id;
+
+  try {
+    if (userId) {
+      const user = await User.findById(userId);
+
+      if (!user) {
+        return res.status(404).send({
+          success: false,
+          status: 404,
+          message: "Who are you? :D Email me at 23achinta@gmail.com.",
+        });
+      }
+      const currentUser = await User.findById(userId);
+      const followingUsers = currentUser.following;
+
+      const feedPosts = await Post.find({ userId: { $in: followingUsers } });
+
+      return res.status(200).send({
+        success: true,
+        message: `Success! ${feedPosts.length} posts found.`,
+        posts: feedPosts,
+      });
+    }
+    return res.status(400).send({
+      success: false,
+      message: `Only users can `,
+      posts: feedPosts,
+    });
+  } catch (err) {
+    console.log(`Internal server error occured while retrieving posts: ${err}`);
+    return res.status(500).send({
+      success: false,
+      status: 500,
+      message: "Internal server error occured while retrieving posts.",
+    });
+  }
+};
+
 const createPost = async (req, res) => {
   const { content, images } = req.body;
   const userId = req.user.id;
@@ -43,47 +84,6 @@ const createPost = async (req, res) => {
       success: false,
       status: 500,
       message: "Internal server error occured while creating post.",
-    });
-  }
-};
-
-const getAllPosts = async (req, res) => {
-  const userId = req.user.id;
-
-  try {
-    const user = await User.findById(userId);
-
-    if (!user) {
-      return res.status(404).send({
-        success: false,
-        status: 404,
-        message: "User not found!",
-      });
-    }
-
-    const posts = await Post.find({ user: userId });
-
-    if (!posts) {
-      return res.status(404).send({
-        success: false,
-        status: 404,
-        message: "No posts found!",
-      });
-    }
-
-    return res.status(200).send({
-      success: true,
-      status: 200,
-      message: "Success!",
-      result: posts.length,
-      posts,
-    });
-  } catch (err) {
-    console.log(`Internal server error occured while retrieving posts: ${err}`);
-    return res.status(500).send({
-      success: false,
-      status: 500,
-      message: "Internal server error occured while retrieving posts.",
     });
   }
 };
@@ -478,7 +478,7 @@ const getAllSavedPosts = async (req, res) => {
 };
 module.exports = {
   createPost,
-  getAllPosts,
+  viewUsersFeedPosts,
   updatePost,
   getPostById,
   deletePost,

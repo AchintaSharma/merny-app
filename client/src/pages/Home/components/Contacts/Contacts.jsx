@@ -57,6 +57,7 @@ const Contacts = () => {
               src={user.avatar}
               alt={user.fullName}
             />
+
             <span
               className={`bottom-0 left-7 absolute w-3.5 h-3.5 border-2 border-white dark:border-gray-800 rounded-full ${
                 user.status == "online" ? "bg-green-500" : "bg-gray-400"

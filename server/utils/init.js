@@ -12,7 +12,7 @@ module.exports = async () => {
         fullName: "admin",
         userName: "admin",
         password: bcrypt.hashSync(process.env.ADMIN_PASSWORD, 8),
-        email: "admin@gmail.com",
+        email: "23achinta@gmail.com",
         role: userRole.admin,
       });
 

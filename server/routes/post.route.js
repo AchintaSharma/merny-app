@@ -4,7 +4,11 @@ const { verifyToken } = require("../middlewares/authjwt");
 module.exports = (app) => {
   app.post("/merny/api/v1/posts/", [verifyToken], postController.createPost);
 
-  app.get("/merny/api/v1/posts", [verifyToken], postController.getAllPosts);
+  app.get(
+    "/merny/api/v1/posts",
+    [verifyToken],
+    postController.viewUsersFeedPosts
+  );
 
   app.patch("/merny/api/v1/post/:id", [verifyToken], postController.updatePost);
 
