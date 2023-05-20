@@ -1,9 +1,11 @@
+import { useEffect } from "react";
+import { useNavigate } from "react-router-dom";
+
 import Post from "../Home/components/Post/Post";
 import CreatePost from "./components/CreatePost/CreatePost";
 import UserInfoDisplayCard from "./components/UserInfoDisplayCard/UserInfoDisplayCard";
 import Recommendations from "./components/Recommendations/Recommendations";
-import { useEffect } from "react";
-import { useNavigate } from "react-router-dom";
+import Contacts from "./components/Contacts/Contacts";
 
 const HomePage = () => {
   // useNavigate() hook
@@ -13,12 +15,8 @@ const HomePage = () => {
     const checkLoginStatus = () => {
       // Check access token
       const accessToken = localStorage.getItem("accessToken");
-      console.log("accessToken: ", accessToken);
       if (!accessToken) {
-        console.log("no access token ");
         navigate("/login");
-      } else {
-        return <h1>Success</h1>;
       }
     };
     checkLoginStatus();
@@ -52,6 +50,7 @@ const HomePage = () => {
         >
           Contacts
         </h1>
+        <Contacts />
       </div>
     </div>
   );

@@ -1,9 +1,9 @@
-import { useState } from "react";
+import { useRef, useState, useEffect } from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faBell, faEnvelope, faHome } from "@fortawesome/free-solid-svg-icons";
 import "./Navbar.css";
+
 import AppLogo from "../../assets/app-logo.png";
-import Avatar from "../../assets/avatar.png";
 import Search from "./components/SearchBar";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
@@ -11,27 +11,27 @@ import { useNavigate } from "react-router-dom";
 const Navbar = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const navigate = useNavigate();
+  const menuRef = useRef(null);
+
+  const user = JSON.parse(localStorage.getItem("user"));
 
   const handleLogout = async () => {
     try {
       // Check for user
-      const user = JSON.parse(localStorage.getItem("user"));
+      // Return if user is not present
       if (!user) {
-        // alert("User not found");
         return;
       }
-      console.log("user:", user._id);
+
+      // Api call to logout changes status to offline
       const AUTH_LOGOUT_API = `http://localhost:4001/merny/api/v1/auth/logout?userId=${user._id}`;
-      // Pass access token to axios header
-      // const axiosConfig = {
-      //   headers: {
-      //     "x-access-token": accessToken,
-      //   },
-      // };
       await axios.post(AUTH_LOGOUT_API);
+
+      // Remove user info from local storage
       localStorage.removeItem("accessToken");
       localStorage.removeItem("user");
 
+      // Navigate to login page
       navigate("/login");
     } catch (error) {
       alert(error.response.data.message);
@@ -52,6 +52,11 @@ const Navbar = () => {
       <div className="flex items-center">
         <Search />
         <button className="mr-4">
+          <a href="/">
+            <FontAwesomeIcon icon={faHome} size="lg" color="#1778f2" />
+          </a>
+        </button>
+        <button className="mr-4">
           <FontAwesomeIcon icon={faBell} size="lg" color="#1778f2" />
         </button>
         <button className="mr-4">
@@ -59,22 +64,21 @@ const Navbar = () => {
             <FontAwesomeIcon icon={faEnvelope} size="lg" color="#1778f2" />
           </a>
         </button>
-        <button className="mr-4">
-          <a href="/">
-            <FontAwesomeIcon icon={faHome} size="lg" color="#1778f2" />
-          </a>
-        </button>
-        <div className="w-10 h-10 rounded-full border-2 border-blue-300 overflow-hidden">
+
+        <div
+          ref={menuRef}
+          className="w-10 h-10 rounded-full border-2 border-blue-500 overflow-hidden"
+        >
           <button onClick={handleAvatarClick}>
             <img
-              src={Avatar}
+              src={user.avatar}
               alt="Avatar"
               className="w-full h-full object-cover"
             />
           </button>
         </div>
         {isMenuOpen && (
-          <div className="absolute z-10 top-16 right-2 bg-white border rounded-md shadow-lg w-100 mt-2 p-2">
+          <div className="absolute z-10 top-16 right-2 bg-white border rounded-md shadow-lg w-100 mt-2 px-1 py-2">
             <button
               className="block w-full text-left px-4 py-2 hover:bg-gray-100"
               onClick={() => {

@@ -377,6 +377,54 @@ const userSuggestions = async (req, res) => {
 //   }
 // };
 
+// Get user contacts
+const userContacts = async (req, res) => {
+  try {
+    const userId = req.user._id; // Assuming the authenticated user ID is available in req.user
+
+    // Find the current user
+    const currentUser = await User.findById(userId).populate("following");
+
+    if (!currentUser) {
+      return res.status(404).send({
+        success: false,
+        status: 404,
+        message: "User not found.",
+      });
+    }
+
+    const following = currentUser.following;
+
+    // Find users who are following back
+    const contacts = await User.find({
+      _id: { $in: following },
+      following: currentUser._id,
+    });
+
+    const contactResult = contacts.map((contact) => ({
+      avatar: contact.avatar,
+      _id: contact._id,
+      fullName: contact.fullName,
+      userName: contact.userName,
+    }));
+
+    console.log(`Found ${contactResult.length} contacts for user ${userId}.`);
+    return res.status(200).send({
+      success: true,
+      status: 200,
+      message: `Successfully fetched ${contactResult.length} contacts.`,
+      contacts: contactResult,
+    });
+  } catch (err) {
+    console.log("Error while fetching user contacts: ", err.message);
+    return res.status(500).send({
+      success: false,
+      status: 500,
+      message: "Internal server error while fetching user contacts.",
+    });
+  }
+};
+
 module.exports = {
   searchAllUsers,
   searchUser,
@@ -384,4 +432,5 @@ module.exports = {
   followUser,
   unfollowUser,
   userSuggestions,
+  userContacts,
 };

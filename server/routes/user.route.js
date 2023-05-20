@@ -29,6 +29,8 @@ module.exports = (app) => {
     userController.userSuggestions
   );
 
+  app.get("/merny/api/v1/contacts", [verifyToken], userController.userContacts);
+
   // app.delete(
   //   "/iga/api/v1/users/delete/:id",
   //   [verifyToken, validateUserIdParam],

@@ -2,6 +2,9 @@ import { useState } from "react";
 import Avatar from "../../../../assets/avatar.png";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faCamera, faImage, faTimes } from "@fortawesome/free-solid-svg-icons";
+
+const user = JSON.parse(localStorage.getItem("user"));
+
 function CreatePost() {
   const [showModal, setShowModal] = useState(false);
   const [text, setText] = useState("");
@@ -24,11 +27,11 @@ function CreatePost() {
   const NAME = "John Doe";
   return (
     <div className="flex bg-white shadow-md rounded-lg p-4 w-full mb-6 h-18">
-      <img className="w-10 h-10 rounded-full mr-2" src={Avatar} alt="" />
+      <img className="w-10 h-10 rounded-full mr-2" src={user.avatar} alt="" />
       <input
         type="text"
         className="h-10 px-2 border-none rounded w-11/12 focus:outline-none"
-        placeholder={`What's on your mind, ${NAME.split(" ")[0]}?`}
+        placeholder={`What's on your mind, ${user.fullName.split(" ")[0]}?`}
         onClick={handleModalOpen}
         value={text}
         onChange={handleTextChange}

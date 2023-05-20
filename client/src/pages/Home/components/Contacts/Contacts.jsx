@@ -2,13 +2,13 @@ import PropTypes from "prop-types";
 import axios from "axios";
 import { useEffect, useState } from "react";
 
-const USER_SUGGESTION_API =
-  "http://localhost:4001/merny/api/v1/suggestionsUser";
+const USER_CONTACTS_API = "http://localhost:4001/merny/api/v1/contacts";
 
-const Recommendations = () => {
-  const [userSuggestions, setUserSuggestions] = useState([]);
+const Contacts = () => {
+  const [userContacts, setUserContacts] = useState([]);
   const [loading, setLoading] = useState(true);
 
+  console.log("userContacts: ", userContacts);
   useEffect(() => {
     const accessToken = localStorage.getItem("accessToken");
     if (!accessToken) {
@@ -21,57 +21,35 @@ const Recommendations = () => {
       },
     };
 
-    const fetchUserRecommendations = async () => {
+    const fetchUserContacts = async () => {
       try {
-        const response = await axios.get(USER_SUGGESTION_API, axiosConfig);
-        setUserSuggestions(response.data);
+        const response = await axios.get(USER_CONTACTS_API, axiosConfig);
+        setUserContacts(response.data.contacts);
         setLoading(false);
       } catch (error) {
         alert(error.response.data.message);
       }
     };
 
-    fetchUserRecommendations();
+    fetchUserContacts();
   }, []);
 
   if (loading) {
     return <div>Loading...</div>; // or any loading indicator you prefer
   }
 
-  const handleFollowButton = async (userId) => {
+  const handleMessageButton = async (userId) => {
     // Code
     try {
-      const accessToken = localStorage.getItem("accessToken");
-      if (!accessToken) {
-        // Handle access token not found
-        return;
-      }
-
-      const axiosConfig = {
-        headers: {
-          "x-access-token": accessToken,
-        },
-      };
-
-      const FOLLOW_USER_API = `http://localhost:4001/merny/api/v1/user/${userId}/follow`;
-
-      await axios.patch(FOLLOW_USER_API, null, axiosConfig);
-
-      // Remove the user from the userSuggestions state
-      setUserSuggestions((prevSuggestions) =>
-        prevSuggestions.filter((user) => user._id !== userId)
-      );
-
-      // Handle successful follow
-      console.log("User followed successfully.");
+      console.log("Sending message to user: ", userId);
     } catch (error) {
       // Handle follow error
-      console.log("Error following user:", error);
+      console.log("Error messsaging user:", error);
     }
   };
   return (
     <div className="bg-white shadow-md rounded-lg pt-4 px-4 w-full mb-6 relative">
-      {userSuggestions.map((user) => (
+      {userContacts.map((user) => (
         <div className="flex items-center pb-4" key={user._id}>
           <div className="relative">
             <img
@@ -93,9 +71,9 @@ const Recommendations = () => {
 
           <button
             className="ml-auto rounded-lg px-4 py-2 text-white bg-blue-500 hover:bg-blue-600"
-            onClick={() => handleFollowButton(user._id)}
+            onClick={() => handleMessageButton(user._id)}
           >
-            Follow
+            Message
           </button>
         </div>
       ))}
@@ -103,8 +81,8 @@ const Recommendations = () => {
   );
 };
 
-Recommendations.propTypes = {
-  userSuggestions: PropTypes.arrayOf(
+Contacts.propTypes = {
+  userContacts: PropTypes.arrayOf(
     PropTypes.shape({
       id: PropTypes.string.isRequired,
       name: PropTypes.string.isRequired,
@@ -113,4 +91,4 @@ Recommendations.propTypes = {
   ),
 };
 
-export default Recommendations;
+export default Contacts;
