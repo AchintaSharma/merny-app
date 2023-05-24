@@ -1,30 +1,34 @@
-const getTimeSinceCreated = (createdDate) => {
+const getTimeSinceCreated = (createdAt) => {
   const currentDate = new Date();
-  console.log(currentDate);
-  const timeDiffInMs = currentDate?.getTime() - createdDate.getTime();
-  console.log(timeDiffInMs);
-  // Calculate time differences in seconds, minutes, hours, days, and weeks
-  const seconds = Math.floor(timeDiffInMs / 1000);
+  const createdDate = new Date(createdAt);
+  const timeDiff = Math.abs(currentDate - createdDate);
+
+  // Calculate time differences
+  const seconds = Math.floor(timeDiff / 1000);
   const minutes = Math.floor(seconds / 60);
   const hours = Math.floor(minutes / 60);
   const days = Math.floor(hours / 24);
   const weeks = Math.floor(days / 7);
+  const years = Math.floor(days / 365);
 
-  // Return appropriate time stamp
   if (seconds < 30) {
     return "Just now";
   } else if (seconds < 60) {
-    return `${seconds} seconds`;
+    return `${seconds} seconds ago`;
   } else if (minutes < 60) {
-    return `${minutes} minutes`;
+    return `${minutes} minutes ago`;
   } else if (hours < 24) {
-    return `${hours}h`;
-  } else if (days <= 6) {
-    return `${days}d`;
+    return `${hours} hours ago`;
+  } else if (days < 7) {
+    return `${days} days ago`;
+  } else if (weeks < 52) {
+    return `${weeks} weeks ago`;
   } else {
-    return `${weeks}w`;
+    return `${years} years ago`;
   }
 };
+
+export default getTimeSinceCreated;
 
 const getTimeElapsed = (createdAt) => {
   const diff = Math.round((new Date() - new Date(createdAt)) / 60000);

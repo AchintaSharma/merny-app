@@ -8,6 +8,7 @@ const PostHeader = ({ avatar, userName, createdAt }) => {
         <p className="font-bold text-left">{userName}</p>
         <p className="text-gray-600 text-sm text-left">
           {getTimeSinceCreated(createdAt)}
+          {/* ChatGPT code this function getTimeSinceCreated */}
         </p>
       </div>
     </div>
@@ -17,7 +18,7 @@ const PostHeader = ({ avatar, userName, createdAt }) => {
 PostHeader.propTypes = {
   avatar: PropTypes.string,
   userName: PropTypes.string.isRequired,
-  createdAt: PropTypes.instanceOf(Date).isRequired,
+  createdAt: PropTypes.string.isRequired,
 };
 
 export default PostHeader;

@@ -1,13 +1,15 @@
 import { useState } from "react";
+import PropTypes from "prop-types";
+import axios from "axios";
+
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faCamera, faImage, faTimes } from "@fortawesome/free-solid-svg-icons";
-import axios from "axios";
 
 const user = JSON.parse(localStorage.getItem("user"));
 
 const CREATE_POST_API = "http://localhost:4001/merny/api/v1/posts";
 
-function CreatePost() {
+function CreatePost({ addPost }) {
   const [showModal, setShowModal] = useState(false);
   const [text, setText] = useState("");
   const [images, setImages] = useState([]);
@@ -194,5 +196,9 @@ function CreatePost() {
     </div>
   );
 }
+
+CreatePost.propTypes = {
+  addPost: PropTypes.func,
+};
 
 export default CreatePost;

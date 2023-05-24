@@ -8,7 +8,7 @@ const Contacts = () => {
   const [userContacts, setUserContacts] = useState([]);
   const [loading, setLoading] = useState(true);
 
-  console.log("userContacts: ", userContacts);
+  // console.log("userContacts: ", userContacts);
   useEffect(() => {
     const accessToken = localStorage.getItem("accessToken");
     if (!accessToken) {

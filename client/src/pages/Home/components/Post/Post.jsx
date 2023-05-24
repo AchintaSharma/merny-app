@@ -6,8 +6,6 @@ import PostActions from "./PostActions";
 import PostStats from "./PostStats";
 import CommentSection from "./CommentSection";
 
-const VIEW_POST
-
 const Post = ({
   avatar,
   userName,
@@ -17,13 +15,6 @@ const Post = ({
   likes,
   comments,
 }) => {
-  console.log(
-    `Inside of Post component:\n avatar=${avatar}\n 
-    userName=${userName}\n createdAt=${createdAt}\n
-    content=${content}\n images=${images}\n 
-    likes=${likes}\n comments=${comments} `
-  );
-
   const postHeaderProps = { avatar, userName, createdAt };
   const postContentProps = { content, images };
   const postStatsProps = { likes, comments };
@@ -56,7 +47,7 @@ const Post = ({
           type="text"
           className="h-10 px-2 border-none rounded w-11/12 focus:outline-none"
           placeholder={`Add a comment...`}
-          onClick=""
+          // onClick=""
           // value={text}
           // onChange={handleTextChange}
         />
@@ -74,7 +65,7 @@ const Post = ({
 Post.propTypes = {
   avatar: PropTypes.string,
   userName: PropTypes.string.isRequired,
-  createdAt: PropTypes.instanceOf(Date).isRequired,
+  createdAt: PropTypes.string.isRequired,
   content: PropTypes.string.isRequired,
   images: PropTypes.arrayOf(PropTypes.string),
   likes: PropTypes.array.isRequired,

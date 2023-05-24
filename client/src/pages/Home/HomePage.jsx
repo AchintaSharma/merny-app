@@ -1,7 +1,7 @@
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 
-import Post from "../Home/components/Post/Post";
+import Posts from "../Home/components/Posts/Posts";
 import CreatePost from "./components/CreatePost/CreatePost";
 import UserInfoDisplayCard from "./components/UserInfoDisplayCard/UserInfoDisplayCard";
 import Recommendations from "./components/Recommendations/Recommendations";
@@ -22,11 +22,18 @@ const HomePage = () => {
     checkLoginStatus();
   }, []);
 
+  const [allPosts, setAllPosts] = useState([]);
+
+  const addPost = (newPost) => {
+    setAllPosts((prevPosts) => [newPost, ...prevPosts]);
+  };
+
   return (
     <div className="grid grid-cols-1 sm:grid-cols-12 gap-6 mx-6">
       <div className="col-span-1 sm:col-span-8 h-20">
         {/* Create post component */}
-        <CreatePost />
+        <CreatePost addPost={addPost} />
+        <Posts posts={allPosts} />
         {/* Feed */}
         {/* <Post {...post1} />
         <Post {...post2} />

@@ -1,5 +1,6 @@
 const Post = require("../models/post.model");
 const User = require("../models/user.model");
+const mongoose = require("mongoose");
 
 // Controller to view feed posts of the logged in user.
 const viewUsersFeedPosts = async (req, res) => {
@@ -7,19 +8,27 @@ const viewUsersFeedPosts = async (req, res) => {
 
   try {
     if (userId) {
-      const user = await User.findById(userId);
+      const currentUser = await User.findById(userId);
 
-      if (!user) {
+      if (!currentUser) {
         return res.status(404).send({
           success: false,
           status: 404,
           message: "Who are you? :D Email me at 23achinta@gmail.com.",
         });
       }
-      const currentUser = await User.findById(userId);
       const followingUsers = currentUser.following;
 
-      const feedPosts = await Post.find({ userId: { $in: followingUsers } });
+      const followingUsersPosts = await Post.find({
+        user: { $in: followingUsers },
+      }).populate("user", "avatar userName");
+
+      const myPosts = await Post.find({ user: currentUser._id }).populate(
+        "user",
+        "avatar userName"
+      );
+
+      const feedPosts = [...myPosts, ...followingUsersPosts];
 
       return res.status(200).send({
         success: true,
@@ -29,7 +38,7 @@ const viewUsersFeedPosts = async (req, res) => {
     }
     return res.status(400).send({
       success: false,
-      message: `Only users can `,
+      message: `Only users can view.`,
       posts: feedPosts,
     });
   } catch (err) {
