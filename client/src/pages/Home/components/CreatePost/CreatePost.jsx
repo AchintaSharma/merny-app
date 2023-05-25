@@ -9,24 +9,10 @@ const user = JSON.parse(localStorage.getItem("user"));
 
 const CREATE_POST_API = "http://localhost:4001/merny/api/v1/posts";
 
-function CreatePost({ addPost }) {
+function CreatePost({ handleCreatePost }) {
   const [showModal, setShowModal] = useState(false);
   const [text, setText] = useState("");
   const [images, setImages] = useState([]);
-
-  // useEffect(() => {
-  //   const handleClickOutside = (event) => {
-  //     if (modalRef.current && !modalRef.current.contains(event.target)) {
-  //       setShowModal(false);
-  //     }
-  //   };
-
-  //   window.addEventListener("click", handleClickOutside);
-
-  //   return () => {
-  //     window.removeEventListener("click", handleClickOutside);
-  //   };
-  // }, []);
 
   const handleModalOpen = () => {
     setShowModal(true);
@@ -59,12 +45,13 @@ function CreatePost({ addPost }) {
       });
 
       // Handle the response as per your requirements
-      console.log("Post created successfully:", response.data);
+      console.log("Post created successfully:", response.data.newPost);
 
       // Clear the form inputs and close the modal
       setText("");
       setImages([]);
       setShowModal(false);
+      handleCreatePost(response.data.newPost);
     } catch (error) {
       // Handle any errors that occurred during the post request
       console.error("Error creating post:", error);
@@ -198,7 +185,7 @@ function CreatePost({ addPost }) {
 }
 
 CreatePost.propTypes = {
-  addPost: PropTypes.func,
+  handleCreatePost: PropTypes.func,
 };
 
 export default CreatePost;
